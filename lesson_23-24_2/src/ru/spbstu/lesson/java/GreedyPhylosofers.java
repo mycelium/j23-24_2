@@ -1,5 +1,9 @@
 package ru.spbstu.lesson.java;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +26,7 @@ public class GreedyPhylosofers {
 			this.left = left;
 			this.right = right;
 			this.isLeft = isLeft;
+
 		}
 
 		@Override
@@ -36,8 +41,38 @@ public class GreedyPhylosofers {
 						right.lock();
 						left.lock();
 					}
+					int count = 0;
+					try {
+						Socket server = new Socket("127.0.0.1", 10000);
+						var request = new GetFood();
+						request.setFoodCount((int) (Math.random() * 10));
+						request.setName(Thread.currentThread().getName());
+						
+						
+						
+						var outputStream = new ObjectOutputStream(server.getOutputStream());
+						outputStream.writeObject(request);
+
+						outputStream.flush();
+
+						var inputObject = new ObjectInputStream(server.getInputStream());
+						var response = (Food) inputObject.readObject();
+						count = response.getCount();
+
+						server.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+
+					if (count == 0) {
+						break;
+					}
+
 					Thread.sleep(EATING_TIME_MS);
-					System.out.println(Thread.currentThread().getName() + " eats");
+					System.out.println(Thread.currentThread().getName() + " eats" + count);
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 					break;
