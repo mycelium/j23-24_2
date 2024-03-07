@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.management.RuntimeErrorException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.spbstu.lesson.java.Philosophers.Philosopher;
 
 public class GreedyPhylosofers {
@@ -17,6 +22,7 @@ public class GreedyPhylosofers {
 //	public static final long WAIT_TIME_MS = 2000;
 
 	static class Philosopher extends Thread {
+		private Logger logger = LoggerFactory.getLogger(Philosopher.class);
 		private static final long THINKING_TIME_MS = 2000;
 		Lock left;
 		Lock right;
@@ -42,28 +48,27 @@ public class GreedyPhylosofers {
 						left.lock();
 					}
 					int count = 0;
-					try {
-						Socket server = new Socket("127.0.0.1", 10000);
+					try (Socket server = new Socket("127.0.0.1", 10000)) {
 						var request = new GetFood();
 						request.setFoodCount((int) (Math.random() * 10));
 						request.setName(Thread.currentThread().getName());
-						
-						
-						
+				
 						var outputStream = new ObjectOutputStream(server.getOutputStream());
 						outputStream.writeObject(request);
 
 						outputStream.flush();
 
 						var inputObject = new ObjectInputStream(server.getInputStream());
-						var response = (Food) inputObject.readObject();
-						count = response.getCount();
-
-						server.close();
+						var response = (FoodResponse) inputObject.readObject();
+						if (response.getStatusCode() == FoodResponse.SUCCESS_CODE) {
+							count = response.getFood().getCount();
+						} else {
+							throw new RuntimeException("Got " + response.getStatusCode() + " error code");
+						}
 					} catch (IOException e) {
-						e.printStackTrace();
+						logger.error("", e);
 					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
+						logger.error("Serialization", e);
 					}
 
 					if (count == 0) {
@@ -71,10 +76,10 @@ public class GreedyPhylosofers {
 					}
 
 					Thread.sleep(EATING_TIME_MS);
-					System.out.println(Thread.currentThread().getName() + " eats" + count);
+					logger.info(Thread.currentThread().getName() + " eats" + count);
 
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					logger.error("", e);
 					break;
 				} finally {
 					right.unlock();
@@ -83,9 +88,8 @@ public class GreedyPhylosofers {
 				try {
 					Thread.sleep(THINKING_TIME_MS);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					logger.error("", e);
 				}
-
 			}
 		}
 	}
