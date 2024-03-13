@@ -5,15 +5,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+import java.sql.*;
 import javax.management.RuntimeErrorException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 
 import ru.spbstu.lesson.java.Philosophers.Philosopher;
 
@@ -24,11 +27,13 @@ public class GreedyPhylosofers {
 	static class Philosopher extends Thread {
 		private Logger logger = LoggerFactory.getLogger(Philosopher.class);
 		private static final long THINKING_TIME_MS = 2000;
+		
 		Lock left;
 		Lock right;
 		Boolean isLeft;
 
-		public Philosopher(Lock left, Lock right, Boolean isLeft) {
+		public Philosopher(Lock left, Lock right, Boolean isLeft, String name) {
+			super(name);
 			this.left = left;
 			this.right = right;
 			this.isLeft = isLeft;
@@ -95,11 +100,17 @@ public class GreedyPhylosofers {
 	}
 
 	public static void main(String[] args) {
+		Logger logger = LoggerFactory.getLogger(GreedyPhylosofers.class);
+		
+		var philosophersNames = PhilosophersDAO.getInstance().getNames();
+		
 		var forks = new Lock[] { new ReentrantLock(), new ReentrantLock(), new ReentrantLock(), new ReentrantLock(),
 				new ReentrantLock() };
-		var philosophers = List.of(new Philosopher(forks[0], forks[1], true),
-				new Philosopher(forks[1], forks[2], false), new Philosopher(forks[2], forks[3], true),
-				new Philosopher(forks[3], forks[4], false), new Philosopher(forks[4], forks[0], true));
+		
+		
+		var philosophers = List.of(new Philosopher(forks[0], forks[1], true, philosophersNames.get(0)),
+			new Philosopher(forks[1], forks[2], false, philosophersNames.get(1)), new Philosopher(forks[2], forks[3], true, philosophersNames.get(2)),
+			new Philosopher(forks[3], forks[4], false,philosophersNames.get(3)), new Philosopher(forks[4], forks[0], true,philosophersNames.get(4)));
 		philosophers.forEach(Thread::start);
 	}
 }

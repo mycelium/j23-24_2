@@ -20,5 +20,8 @@ dependencies {
 	implementation("org.slf4j:slf4j-api:2.0.12")
 	// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
 	implementation("ch.qos.logback:logback-classic:1.5.0")
+	
+	implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+	
 }
 
