@@ -1,15 +1,15 @@
-## Java lessons | Spring 2023
+## Java lessons | Spring 2024
 
 ### Tasks
 
-1. [Weather Bot](https://github.com/mycelium/j23#weather-bot)
-2. [Quiz Bot](https://github.com/mycelium/j23#quiz-bot)
-3. [Task Management Bot](https://github.com/mycelium/j23#task-management-bot)
-4. [Movie Recommendation Bot](https://github.com/mycelium/j23#movie-recommendation-bot)
-5. [Currency Converter Bot](https://github.com/mycelium/j23#currency-converter-bot)
-6. [Event Reminder Bot](https://github.com/mycelium/j23#event-reminder-bot)
-7. [Restaurant Finder Bot](https://github.com/mycelium/j23#restaurant-finder-bot)
-8. [Trip Planner Bot](https://github.com/mycelium/j23#trip-planner-bot)
+1. [Weather Bot](https://github.com/mycelium/j23-24_2#weather-bot)
+2. [Quiz Bot](https://github.com/mycelium/j23-24_2#quiz-bot)
+3. [Task Management Bot](https://github.com/mycelium/j23-24_2#task-management-bot)
+4. [Movie Recommendation Bot](https://github.com/mycelium/j23-24_2#movie-recommendation-bot)
+5. [Currency Converter Bot](https://github.com/mycelium/j23-24_2#currency-converter-bot)
+6. [Event Reminder Bot](https://github.com/mycelium/j23-24_2#event-reminder-bot)
+7. [Restaurant Finder Bot](https://github.com/mycelium/j23-24_2#restaurant-finder-bot)
+8. [Trip Planner Bot](https://github.com/mycelium/j23-24_2#trip-planner-bot)
 
 
 ### Common requiremens (for all variants):
