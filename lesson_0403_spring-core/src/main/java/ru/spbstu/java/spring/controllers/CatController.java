@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.spbstu.java.spring.components.Cat;
 import ru.spbstu.java.spring.repositories.CatRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,18 +15,15 @@ public class CatController {
     @Autowired
     private CatRepository catRepository;
 
-    private static Map<String, Cat> cats = Map.of(new String("Black"), new Cat("Boris",15,"Black"));
+    private static Map<String, Cat> cats = Map.of(new String("Black"), new Cat("Boris", 15, "Black"));
 
     @GetMapping("/cats")
-    public List<ru.spbstu.java.spring.entities.Cat> getCats(){
-        ArrayList<ru.spbstu.java.spring.entities.Cat> cats = new ArrayList<>();
-        catRepository.findAll().forEach(cats::add);
-
-        return cats;
+    public List<ru.spbstu.java.spring.entities.Cat> getCats() {
+        return catRepository.findAll();
     }
 
     @GetMapping("/cat")
-    public String getCat(@RequestParam(value="color") String color){
+    public String getCat(@RequestParam(value = "color") String color) {
         return cats.get(color).toJSON();
     }
 }

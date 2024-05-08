@@ -8,9 +8,10 @@ import ru.spbstu.java.spring.components.Tail;
 public class Configuration {
 
     @Bean
-    public Tail publicTail(){
+    public Tail publicTail() {
         return new Tail(10000);
     }
+
     @Bean
     public Cat redCat() {
         return new Cat("Kesha", 5, "Red");

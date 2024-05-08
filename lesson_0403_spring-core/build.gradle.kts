@@ -20,10 +20,15 @@ dependencies {
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper:11.0.0-M19")
     implementation("com.fasterxml.jackson.core:jackson-core:2.17.0")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
-    implementation("org.mybatis:mybatis-spring:3.0.3")
+    implementation("org.hibernate.orm:hibernate-core:6.5.0.Final")
     implementation("org.springframework.data:spring-data-jdbc:3.2.5")
+    implementation("org.springframework.data:spring-data-jpa:3.2.5")
     implementation("org.hibernate.orm:hibernate-community-dialects:6.5.0.Final")
     compileOnly("jakarta.servlet:jakarta.servlet-api:6.1.0-M2")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0-M2")
+
+    implementation("com.h2database:h2:2.2.224")
+
 
     //implementation("org.springframework:org.springframework.web.servlet:3.2.2.RELEASE")
 

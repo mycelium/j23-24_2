@@ -7,7 +7,7 @@
     <!-- cats -->
 
     <bean id="publicTail" class="ru.spbstu.java.spring.components.Tail">
-        <property name="length" value="10000" />
+        <property name="length" value="10000"/>
     </bean>
 
     <bean id="blackCat" class="ru.spbstu.java.spring.components.Cat">

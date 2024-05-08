@@ -59,7 +59,7 @@ public class Cat {
         this.tail = tail;
     }
 
-    public String toJSON(){
-        return "{ \"name\" : "+ "\"" + name + "\"" + "," + "\"color\" : "+ "\"" + color + "\"" + "," + "\"age\" : "+ age + "}";
+    public String toJSON() {
+        return "{ \"name\" : " + "\"" + name + "\"" + "," + "\"color\" : " + "\"" + color + "\"" + "," + "\"age\" : " + age + "}";
     }
 }

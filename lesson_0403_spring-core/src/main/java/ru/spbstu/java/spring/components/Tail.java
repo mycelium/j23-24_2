@@ -7,7 +7,7 @@ public class Tail {
         this.length = length;
     }
 
-    public Tail(){
+    public Tail() {
 
     }
 

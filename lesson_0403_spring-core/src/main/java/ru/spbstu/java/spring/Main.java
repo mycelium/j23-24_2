@@ -28,7 +28,7 @@ public class Main {
         Cat redCat = xmlContext.getBean("redCat", Cat.class);
 
         System.out.println(blackCat.getName() + "\n" + greyCat.getName() + "\n" +
-                           redCat.getName());
+                redCat.getName());
 
         System.out.println(redCat.getTail().getLength());
 
@@ -58,7 +58,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        Context context= tomcat.addWebapp("", baseDir.getAbsolutePath());
+        Context context = tomcat.addWebapp("", baseDir.getAbsolutePath());
 
 
         // Create a Spring application context
@@ -70,7 +70,6 @@ public class Main {
 
         Tomcat.addServlet(context, "dispatcherServlet", dispatcherServlet).setLoadOnStartup(1);
         context.addServletMappingDecoded("/*", "dispatcherServlet");
-
 
         try {
             tomcat.start();
